@@ -51,7 +51,7 @@ public class TicketService {
         User bookedBy = userOptional.get();
 
         List<SeatInShow> updatedSeats = new ArrayList<>();
-        Date current = new Date();
+        Date current = new Date(); //current time
         for(SeatInShow seat: seats){
             seat.setSeatStatus(SeatStatus.Locked);
             seat.setLockedAt(current);
@@ -75,7 +75,9 @@ public class TicketService {
         } else if(seat.getSeatStatus().equals(SeatStatus.Locked)){
             // logic
             // 9:10 pm on 23rd Aug 2023
+            //give total miliseconds till lockedat form 1-Jan-1970
             long lockedAt = seat.getLockedAt().getTime();
+            //give milisecond since 1-Jan-1970 till currenttime
             long current = System.currentTimeMillis();
 
             long duration = current - lockedAt;
